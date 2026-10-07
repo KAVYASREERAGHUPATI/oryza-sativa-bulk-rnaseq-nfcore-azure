@@ -5,9 +5,7 @@ set -euo pipefail
 
 echo "nf-core/rnaseq Pipeline Summary"
 
-# --------------------------------------------------
 # Project directories
-# --------------------------------------------------
 
 PROJECT_DIR="/data/RNAseq_Project"
 
