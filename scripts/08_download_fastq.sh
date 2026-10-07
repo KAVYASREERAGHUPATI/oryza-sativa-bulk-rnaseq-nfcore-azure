@@ -2,9 +2,7 @@
 
 set -euo pipefail
 
-echo "=========================================="
 echo "Downloading SRA samples and creating FASTQ files"
-echo "=========================================="
 
 # Check whether the data disk is mounted
 if ! mountpoint -q /data; then
@@ -33,10 +31,8 @@ do
         continue
     fi
 
-    echo
-    echo "=========================================="
+   
     echo "Downloading ${SRR}"
-    echo "=========================================="
 
     prefetch "${SRR}" \
         --output-directory "${SRA_CACHE_DIR}" \
@@ -59,10 +55,6 @@ do
 
 done < "${ACCESSION_FILE}"
 
-echo
-echo "=========================================="
-echo "All accessions downloaded successfully"
-echo "=========================================="
-
+echo "All accessions downloaded successfully
 echo "FASTQ files are available in:"
 echo "${FASTQ_DIR}"
