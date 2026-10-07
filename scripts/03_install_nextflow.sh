@@ -2,15 +2,12 @@
 
 set -euo pipefail
 
-echo "=========================================="
-echo "Checking Java"
-echo "=========================================="
 
+echo "Checking Java"
 java -version
 
-echo "=========================================="
+
 echo "Installing Nextflow"
-echo "=========================================="
 
 cd /tmp
 
@@ -20,12 +17,8 @@ sudo mv nextflow /usr/local/bin/nextflow
 
 sudo chmod +x /usr/local/bin/nextflow
 
-echo "=========================================="
+
 echo "Checking Nextflow installation"
-echo "=========================================="
-
 nextflow -version
-
-echo "=========================================="
 echo "Nextflow installation completed"
-echo "=========================================="
+
