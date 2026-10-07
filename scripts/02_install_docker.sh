@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-echo "=========================================="
+
 echo "Checking Docker installation..."
-echo "=========================================="
+
 
 if command -v docker >/dev/null 2>&1; then
     echo "Docker is already installed."
@@ -24,43 +24,24 @@ else
     newgrp docker
 fi
 
-echo "=========================================="
-echo "Verifying Docker installation..."
-echo "=========================================="
 
+echo "Verifying Docker installation..."
 docker --version
 docker run --rm hello-world
 
-echo "=========================================="
-echo "Listing running Docker containers..."
-echo "=========================================="
 
+echo "Listing running Docker containers..."
 docker ps
 
-echo "=========================================="
+
 echo "Installing bioinformatics tools..."
-echo "=========================================="
 
 sudo apt update
-
 sudo apt install -y \
     sra-toolkit \
     pigz \
     parallel
 
-echo "=========================================="
-echo "Installing Azure CLI..."
-echo "=========================================="
 
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-echo "=========================================="
-echo "Azure CLI installed successfully."
-echo "=========================================="
 
-echo "Please sign in to Azure by running:"
-echo "az login"
-
-echo "=========================================="
-echo "Installation completed successfully."
-echo "=========================================="
