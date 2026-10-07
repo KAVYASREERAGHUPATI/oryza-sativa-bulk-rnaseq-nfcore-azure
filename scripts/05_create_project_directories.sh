@@ -4,9 +4,9 @@ set -euo pipefail
 
 PROJECT_DIR="/data/RNAseq_Project"
 
-echo "=========================================="
+
 echo "Creating RNA-seq project directories"
-echo "=========================================="
+
 
 # Check if the Azure data disk is mounted
 if ! mountpoint -q /data; then
@@ -30,9 +30,8 @@ mkdir -p "${PROJECT_DIR}/downloads"
 mkdir -p "${PROJECT_DIR}/config"
 mkdir -p "${PROJECT_DIR}/sra_cache"
 
-echo "=========================================="
+
 echo "Project directory structure"
-echo "=========================================="
 
 tree "${PROJECT_DIR}"
 
