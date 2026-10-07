@@ -1,4 +1,4 @@
-# oryza-sativa-bulk-rnaseq-nextflow-azure
+# oryza-sativa-bulk-rnaseq-nfcore-azure
 End-to-end bulk RNA-seq analysis of Oryza sativa under drought stress using nf-core/rnaseq, Nextflow and Microsoft Azure.
 This repository contains the complete workflow used for bulk RNA sequencing (RNA-seq) analysis of Oryza sativa (rice) under drought stress using the nf-core/rnaseq pipeline executed with Nextflow on Microsoft Azure. The project includes Azure virtual machine specifications, input files, execution commands, and downstream analyses.
 ............................................................................................................
