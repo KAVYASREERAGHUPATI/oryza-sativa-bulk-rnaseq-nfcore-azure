@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-echo "=================================================="
+
 echo "Preparing Azure 3 TB managed data disk"
-echo "=================================================="
 
 # This script does not create or attach a new Azure disk.
 # It uses the managed data disk already selected during VM creation.
@@ -18,9 +17,8 @@ echo
 echo "Current disk information:"
 lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS
 
-# --------------------------------------------------
+
 # Check whether /data is already correctly mounted
-# --------------------------------------------------
 
 if mountpoint -q "$MOUNT_POINT"; then
 
@@ -46,9 +44,8 @@ else
     echo "$MOUNT_POINT is not currently mounted."
     echo "Searching for the attached Azure 3 TB managed disk..."
 
-    # --------------------------------------------------
+   
     # Detect large non-OS disks
-    # --------------------------------------------------
 
     ROOT_DEVICE=$(findmnt -n -o SOURCE /)
 
@@ -102,9 +99,8 @@ else
     echo "Detected Azure data disk: $DATA_DISK"
     echo "Disk size: $(lsblk -dn -o SIZE "$DATA_DISK")"
 
-    # --------------------------------------------------
+  
     # Detect existing partition
-    # --------------------------------------------------
 
     DATA_PARTITION=$(
         lsblk -nr -o PATH,TYPE "$DATA_DISK" |
@@ -241,9 +237,8 @@ else
 
 fi
 
-# --------------------------------------------------
+
 # Verify that /data is not the OS or temporary disk
-# --------------------------------------------------
 
 DATA_SOURCE=$(findmnt -n -o SOURCE "$MOUNT_POINT")
 ROOT_SOURCE=$(findmnt -n -o SOURCE /)
@@ -271,9 +266,7 @@ if [ -n "$RESOURCE_DEVICE" ] &&
     exit 1
 fi
 
-# --------------------------------------------------
 # Create project directories
-# --------------------------------------------------
 
 echo
 echo "Creating RNA-seq project directories..."
@@ -292,9 +285,8 @@ sudo mkdir -p \
 
 sudo chown -R "$USER":"$USER" "$PROJECT_DIR"
 
-# --------------------------------------------------
+
 # Test data-disk write access
-# --------------------------------------------------
 
 TEST_FILE="${PROJECT_DIR}/.write_test"
 
@@ -308,15 +300,11 @@ fi
 
 rm -f "$TEST_FILE"
 
-# --------------------------------------------------
+
 # Final output
-# --------------------------------------------------
 
 echo
-echo "=================================================="
 echo "Azure data disk preparation completed"
-echo "=================================================="
-
 echo
 echo "Mounted disk:"
 findmnt "$MOUNT_POINT"
