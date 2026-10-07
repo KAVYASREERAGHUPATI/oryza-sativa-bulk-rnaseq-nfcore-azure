@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-echo "=========================================="
-echo "Running nf-core/rnaseq pipeline"
-echo "=========================================="
 
-# --------------------------------------------------
+echo "Running nf-core/rnaseq pipeline"
+
+
 # Check whether the data disk is mounted
-# --------------------------------------------------
 
 if ! mountpoint -q /data; then
     echo "ERROR: The data disk is not mounted at /data."
@@ -16,9 +14,8 @@ if ! mountpoint -q /data; then
     exit 1
 fi
 
-# --------------------------------------------------
+
 # Define project directories
-# --------------------------------------------------
 
 PROJECT_DIR="/data/RNAseq_Project"
 
@@ -30,9 +27,8 @@ RESULTS_DIR="${PROJECT_DIR}/results"
 
 CONFIG_FILE="config/nextflow.config"
 
-# --------------------------------------------------
+
 # Run nf-core/rnaseq
-# --------------------------------------------------
 
 nextflow run nf-core/rnaseq \
     -profile docker \
@@ -44,10 +40,8 @@ nextflow run nf-core/rnaseq \
     --aligner star_salmon \
     -resume
 
-echo
-echo "=========================================="
+
 echo "RNA-seq pipeline completed successfully"
-echo "=========================================="
 
 echo "Results directory:"
 echo "${RESULTS_DIR}"
