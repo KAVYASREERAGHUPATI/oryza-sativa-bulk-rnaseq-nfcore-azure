@@ -2,13 +2,9 @@
 
 set -euo pipefail
 
-echo "=========================================="
 echo "Downloading Reference Genome and Annotation"
-echo "=========================================="
 
-# --------------------------------------------------
 # Check whether the data disk is mounted
-# --------------------------------------------------
 
 if ! mountpoint -q /data; then
     echo "ERROR: The Azure data disk is not mounted at /data."
@@ -16,9 +12,8 @@ if ! mountpoint -q /data; then
     exit 1
 fi
 
-# --------------------------------------------------
+
 # Project directories
-# --------------------------------------------------
 
 PROJECT_DIR="/data/RNAseq_Project"
 REFERENCE_DIR="${PROJECT_DIR}/reference"
@@ -31,24 +26,16 @@ echo
 echo "Reference files will be downloaded to:"
 pwd
 
-# --------------------------------------------------
-# Reference file names and URLs
-# --------------------------------------------------
 
+# Reference file names and URLs
 FASTA="${REFERENCE_DIR}/Oryza_sativa.IRGSP-1.0.dna_sm.toplevel.fa.gz"
 GTF="${REFERENCE_DIR}/Oryza_sativa.IRGSP-1.0.62.gtf.gz"
 
 FASTA_URL="https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-62/fasta/oryza_sativa/dna/Oryza_sativa.IRGSP-1.0.dna_sm.toplevel.fa.gz"
 GTF_URL="https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-62/gtf/oryza_sativa/Oryza_sativa.IRGSP-1.0.62.gtf.gz"
 
-# --------------------------------------------------
-# Download reference genome
-# --------------------------------------------------
 
-echo
-echo "=========================================="
-echo "Downloading Oryza sativa reference genome"
-echo "=========================================="
+# Download reference genome
 
 if [[ -f "${FASTA}" ]]; then
     echo "Reference genome already exists."
@@ -66,14 +53,8 @@ else
     wget -c "${FASTA_URL}"
 fi
 
-# --------------------------------------------------
-# Download GTF annotation
-# --------------------------------------------------
 
-echo
-echo "=========================================="
-echo "Downloading GTF annotation"
-echo "=========================================="
+# Download GTF annotation
 
 if [[ -f "${GTF}" ]]; then
     echo "GTF annotation already exists."
@@ -91,14 +72,9 @@ else
     wget -c "${GTF_URL}"
 fi
 
-# --------------------------------------------------
-# Check downloaded files
-# --------------------------------------------------
 
-echo
-echo "=========================================="
+# Check downloaded files
 echo "Checking downloaded reference genome"
-echo "=========================================="
 
 if [[ ! -s "${FASTA}" ]]; then
     echo "ERROR: Reference genome was not downloaded correctly."
@@ -110,10 +86,7 @@ fi
 echo "Reference genome is available:"
 ls -lh "${FASTA}"
 
-echo
-echo "=========================================="
 echo "Checking downloaded annotation"
-echo "=========================================="
 
 if [[ ! -s "${GTF}" ]]; then
     echo "ERROR: Annotation file was not downloaded correctly."
@@ -125,14 +98,7 @@ fi
 echo "Annotation file is available:"
 ls -lh "${GTF}"
 
-# --------------------------------------------------
-# Test compressed-file integrity
-# --------------------------------------------------
-
-echo
-echo "=========================================="
 echo "Testing compressed files"
-echo "=========================================="
 
 gzip -t "${FASTA}"
 echo "Reference genome passed the gzip integrity test."
@@ -140,28 +106,4 @@ echo "Reference genome passed the gzip integrity test."
 gzip -t "${GTF}"
 echo "Annotation file passed the gzip integrity test."
 
-# --------------------------------------------------
-# Final summary
-# --------------------------------------------------
-
-echo
-echo "=========================================="
-echo "Reference files downloaded successfully"
-echo "=========================================="
-
-echo
-echo "Reference genome:"
-echo "${FASTA}"
-
-echo
-echo "Annotation file:"
-echo "${GTF}"
-
-echo
-echo "Files are available in:"
-echo "${REFERENCE_DIR}"
-
-echo
-echo "=========================================="
 echo "Reference download completed successfully"
-echo "=========================================="
